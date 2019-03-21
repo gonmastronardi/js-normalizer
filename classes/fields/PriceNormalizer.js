@@ -1,30 +1,19 @@
-module.exports = class SimpleNormalizer {
-  normalizeObjectsInMap(aMapOfObjects) {
-    for (var key in aMapOfObjects) {
-      aMapOfObjects[key] = this.normalizeObject(aMapOfObjects[key]);
-    }
-    return aMapOfObjects;
-  }
+const FieldNormalizer = require("./FieldNormalizer");
 
-  normalizeObject(object) {
-    console.log("El precio sin normalizar es: " + object.precio);
-    object.precio = this.normalizePriceOf(object);
-    console.log("El precio normalizado es: " + object.precio);
+module.exports = class PriceNormalizer extends FieldNormalizer {
+  
+  normalize(anObject, attribute) {
 
-    //Normalizar memoriaRam
-    console.log("La memoria ram sin normalizar es: " + object.memoriaRam);
-    object.memoriaRam = this.normalizeMemoryOf(object);
-    console.log("La memoria ram normalizada es: " + object.memoriaRam);
+    let price = anObject[attribute];
 
-    console.log("-");
+    console.log(`Price: ${price}`);
 
-    return object;
-  }
-
-  normalizePriceOf(object) {
-    let price = object.precio;
     price = this.getNormalizedPrice(price);
-    return price;
+
+    console.log(`Normalized price: ${price}`);
+    console.log('-')
+    
+    anObject[attribute] = price;
   }
 
   isCharNumber(c) {
@@ -108,7 +97,4 @@ module.exports = class SimpleNormalizer {
     return price;
   }
 
-  normalizeMemoryOf(object) {
-    throw new TypeError("Must override method");
-  }
 };
