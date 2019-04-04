@@ -1,13 +1,13 @@
 const jsonfile = require("jsonfile");
-const fieldNormalizerFactory = require('./classes/fieldNormalizerFactory');
+const fieldNormalizerFactory = require("./classes/fieldNormalizerFactory");
 const ObjectNormalizer = require("./classes/ObjectNormalizer");
 
 const inputFile = "./data/input.json";
 const outpitFile = "./data/output.json";
 
 var configuration = {
-  precio : fieldNormalizerFactory.priceNormalizer,
-  memoriaRam : fieldNormalizerFactory.memoryNormalizer
+  precio: fieldNormalizerFactory.monetaryAmountNormalizer,
+  memoriaRam: fieldNormalizerFactory.memoryNormalizer
 };
 
 const normalizer = new ObjectNormalizer(configuration);

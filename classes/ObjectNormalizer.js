@@ -1,6 +1,6 @@
 module.exports = class ObjectNormalizer {
-  constructor(configuration) {
-    this.configuration = configuration;
+  constructor(aConfiguration) {
+    this.configuration = aConfiguration;
   }
 
   normalizeObjectsInMap(aMapOfObjects) {
@@ -14,7 +14,6 @@ module.exports = class ObjectNormalizer {
     for (var key in this.configuration) {
       this.configuration[key].normalize(anObject, key);
     }
-
     return anObject;
   }
 };
