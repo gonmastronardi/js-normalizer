@@ -35,4 +35,17 @@ describe("getNormalizedAmount", () => {
     let result = monetaryAmountNormalizer.getNormalizedAmount("$100.50");
     expect(result).toMatch(/100,50/);
   });
+  //whitespace
+  it("should normalize: ' '. Expected: $ 0,00 ", () => {
+    let result = monetaryAmountNormalizer.getNormalizedAmount(" ");
+    expect(result).toMatch(/0,00/);
+  });
+  it("should normalize: null. Expected: $ 0,00", () => {
+    let result = monetaryAmountNormalizer.getNormalizedAmount(null);
+    expect(result).toMatch(/0,00/);
+  });
+  it("should normalize: undefined. Expected: $ 0,00", () => {
+    result = monetaryAmountNormalizer.getNormalizedAmount(undefined);
+    expect(result).toMatch(/0,00/);
+  });
 });

@@ -17,18 +17,20 @@ module.exports = class MonetaryAmountNormalizer extends FieldNormalizer {
     return c >= "0" && c <= "9";
   }
 
+  //it returns $ 0,00 if empty, undefined or null
   getNormalizedAmount(anAmount) {
+    if (anAmount === undefined || anAmount === null){
+      return '$ 0,00'
+    }
     let amount = anAmount.replace("$", "");
-
     amount = this.normalizeDecimalOf(amount);
 
     //Formateo de manera igual para todos.
-    amount = new Intl.NumberFormat("es-AR", {
+    return new Intl.NumberFormat("es-AR", {
       style: "currency",
       currency: "ARS"
     }).format(amount);
 
-    return amount;
   }
 
   //It returns the given amount with 2 decimals for any currency
