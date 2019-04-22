@@ -6,6 +6,7 @@ module.exports = class ObjectNormalizer {
   normalizeObjectsInMap(aMapOfObjects) {
     for (var key in aMapOfObjects) {
       aMapOfObjects[key] = this.normalizeObject(aMapOfObjects[key]);
+      console.log('-');
     }
     return aMapOfObjects;
   }

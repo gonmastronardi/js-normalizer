@@ -3,13 +3,9 @@ const FieldNormalizer = require("./FieldNormalizer");
 module.exports = class MonetaryAmountNormalizer extends FieldNormalizer {
   normalize(anObject, attribute) {
     let amount = anObject[attribute];
-
     this.debugField(`Price: ${amount}`);
-
     amount = this.getNormalizedAmount(amount);
-
-    this.debugField(`Normalized price: ${amount}`);
-
+    this.debugInfo(`Normalized price: ${amount}`);
     anObject[attribute] = amount;
   }
 
@@ -19,8 +15,8 @@ module.exports = class MonetaryAmountNormalizer extends FieldNormalizer {
 
   //it returns $ 0,00 if empty, undefined or null
   getNormalizedAmount(anAmount) {
-    if (anAmount === undefined || anAmount === null){
-      return '$ 0,00'
+    if (anAmount === undefined || anAmount === null) {
+      return "$ 0,00";
     }
     let amount = anAmount.replace("$", "");
     amount = this.normalizeDecimalOf(amount);
@@ -30,7 +26,6 @@ module.exports = class MonetaryAmountNormalizer extends FieldNormalizer {
       style: "currency",
       currency: "ARS"
     }).format(amount);
-
   }
 
   //It returns the given amount with 2 decimals for any currency

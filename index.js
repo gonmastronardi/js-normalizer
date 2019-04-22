@@ -7,7 +7,12 @@ const outpitFile = "./data/output.json";
 
 var configuration = {
   precio: fieldNormalizerFactory.monetaryAmountNormalizer,
-  memoriaRam: fieldNormalizerFactory.memoryNormalizer
+  memoriaRam: fieldNormalizerFactory.memoryNormalizer,
+  marca: fieldNormalizerFactory.brandNormalizer,
+  tamanoPantalla: fieldNormalizerFactory.screenSizeNormalizer,
+  camaraPrincipal: fieldNormalizerFactory.megapixelNormalizer,
+  memoriaInterna: fieldNormalizerFactory.memoryNormalizer,
+  bateria: fieldNormalizerFactory.batteryNormalizer
 };
 
 const normalizer = new ObjectNormalizer(configuration);
