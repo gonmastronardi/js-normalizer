@@ -11,7 +11,7 @@ module.exports = class ScreenSizeNormalizer extends FieldNormalizer{
     }
 
     normalizeScreenSize(aValue){
-        if (aValue === undefined || aValue === null || aValue == '') {
+        if (!aValue) {
             return "";
         }
         let size = parseFloat(aValue.replace(',','.'));

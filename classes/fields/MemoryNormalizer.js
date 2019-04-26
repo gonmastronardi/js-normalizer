@@ -13,7 +13,10 @@ module.exports = class MemoryNormalizer extends FieldNormalizer {
       "12GB",
       "16GB",
       "32GB",
-      "64GB"
+      "64GB",
+      "128GB",
+      "256GB",
+      "512GB"
     ];
   }
 

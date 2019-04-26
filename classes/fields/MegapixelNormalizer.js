@@ -24,14 +24,11 @@ module.exports = class MegapixelNormalizer extends FieldNormalizer {
           tempMpx = tempMpx.replace(/[a-zA-Z]+/g, "")
           tempMpx = parseInt(tempMpx);
           result = tempMpx + ' MP';
-        //   console.log(result);
           return result;
       }
-      //Devuelvo todas o la primera?
       while(partial != null){
           result = partial[0];
           result = parseInt(result) + ' MP';
-        //   console.log(result);
           partial = regExp.exec(tempMpx);
       }
       return result;

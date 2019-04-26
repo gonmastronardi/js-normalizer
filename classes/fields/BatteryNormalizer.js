@@ -9,7 +9,7 @@ module.exports = class BatteryNormalizer extends FieldNormalizer {
     anObject[attribute] = battery;
   }
 
-  //it returns the given number + mAh. '' if undefined or null.
+  //it returns the given number + mAh, or '' if undefined or null.
   getNormalizedBattery(aValue) {
     if (!aValue) {
       return "";
@@ -22,6 +22,9 @@ module.exports = class BatteryNormalizer extends FieldNormalizer {
       return battery*1000 + " mAh";
     }
     result = parseFloat(aValue);
-    return result + " mAh";
+    if (result){
+      return result + " mAh";
+    }
+    return '';
   }
 };
