@@ -5,6 +5,7 @@ const debugInfo = require("../../lib/debuggers").info;
 module.exports = class FieldNormalizer {
   constructor() {
     //if setted, console.logs fields properties
+    //export DEBUG=field,info
     this.debugField = debugField;
     this.debugInfo = debugInfo;
   }

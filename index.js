@@ -7,6 +7,7 @@ const outpitFile = "./data/output.json";
 
 //configuration for each field of the JSON object to normalize
 var configuration = {
+  titulo: fieldNormalizerFactory.titleNormalizer,
   precio: fieldNormalizerFactory.monetaryAmountNormalizer,
   memoriaRam: fieldNormalizerFactory.memoryNormalizer,
   marca: fieldNormalizerFactory.brandNormalizer,
@@ -16,7 +17,7 @@ var configuration = {
   bateria: fieldNormalizerFactory.batteryNormalizer
 };
 
-//create an ObjectNormalizer with the previous configuration
+//creates an ObjectNormalizer with the previous configuration
 const normalizer = new ObjectNormalizer(configuration);
 
 //read the input file, and it calls normalize method of the object previously created with the readed file

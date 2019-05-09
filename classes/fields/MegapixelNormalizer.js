@@ -12,7 +12,7 @@ module.exports = class MegapixelNormalizer extends FieldNormalizer {
   
     //it returns '' if undefined or null
     getNormalizedMegapixel(aValue) {
-      if (!aValue) {
+      if (!aValue || aValue == ' '){
         return "";
       }
       let tempMpx = aValue;

@@ -4,6 +4,7 @@ const BrandNormalizer = require("./fields/BrandNormalizer");
 const ScreenSizeNormalizer = require("./fields/ScreenSizeNormalizer");
 const MegapixelNormalizer = require("./fields/MegapixelNormalizer");
 const BatteryNormalizer = require("./fields/BatteryNormalizer");
+const TitleNormalizer = require("./fields/TitleNormalizer");
 
 module.exports = {
   monetaryAmountNormalizer: new MonetaryAmountNormalizer(),
@@ -11,5 +12,6 @@ module.exports = {
   brandNormalizer: new BrandNormalizer(),
   screenSizeNormalizer: new ScreenSizeNormalizer(),
   megapixelNormalizer: new MegapixelNormalizer(),
-  batteryNormalizer: new BatteryNormalizer()
+  batteryNormalizer: new BatteryNormalizer(),
+  titleNormalizer: new TitleNormalizer()
 };
