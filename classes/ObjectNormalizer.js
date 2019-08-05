@@ -7,13 +7,15 @@ module.exports = class ObjectNormalizer {
   normalizeObjectsInMap(aMapOfObjects) {
     for (var key in aMapOfObjects) {
       aMapOfObjects[key] = this.normalizeObject(aMapOfObjects[key]);
-      console.log('-');
+      console.log("-");
     }
     return aMapOfObjects;
   }
 
-  //it receives a JSON object, iterating on the fields 
-  //and it calls the corresponding normalize method depending on the field configuration
+  /**
+   * it receives a JSON object, iterating on the fields
+   * and it calls the corresponding normalize method depending on the field configuration
+   */
   normalizeObject(anObject) {
     for (var key in this.configuration) {
       this.configuration[key].normalize(anObject, key);

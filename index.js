@@ -3,7 +3,7 @@ const fieldNormalizerFactory = require("./classes/fieldNormalizerFactory");
 const ObjectNormalizer = require("./classes/ObjectNormalizer");
 
 const inputFile = "./data/input.json";
-const outpitFile = "./data/output.json";
+const outputFile = "./data/output.json";
 
 //configuration for each field of the JSON object to normalize
 var configuration = {
@@ -14,15 +14,16 @@ var configuration = {
   tamanoPantalla: fieldNormalizerFactory.screenSizeNormalizer,
   camaraPrincipal: fieldNormalizerFactory.megapixelNormalizer,
   memoriaInterna: fieldNormalizerFactory.memoryNormalizer,
-  bateria: fieldNormalizerFactory.batteryNormalizer
+  bateria: fieldNormalizerFactory.batteryNormalizer,
+  sistemaOperativo: fieldNormalizerFactory.osNormalizer
 };
 
 //creates an ObjectNormalizer with the previous configuration
 const normalizer = new ObjectNormalizer(configuration);
 
-//read the input file, and it calls normalize method of the object previously created with the readed file
+//reads the input file, and it calls normalize method of the object previously created with the readed file
 jsonfile
   .readFile(inputFile)
   .then(result => normalizer.normalizeObjectsInMap(result))
-  .then(result => jsonfile.writeFile(outpitFile, result))
+  .then(result => jsonfile.writeFile(outputFile, result))
   .catch(err => console.error(err));
