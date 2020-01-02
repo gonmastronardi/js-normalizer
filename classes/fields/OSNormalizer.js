@@ -5,6 +5,7 @@ module.exports = class OSNormalizer extends FieldNormalizer {
     super();
     this.defaultOS = ["Android", "iOS"];
   }
+
   normalize(anObject, attribute) {
     let os = anObject[attribute];
     this.debugField(`OS: ${os}`);
@@ -13,6 +14,7 @@ module.exports = class OSNormalizer extends FieldNormalizer {
     anObject[attribute] = os;
   }
 
+  //it checks whether a value has the word android or iOS and returns it
   getNormalizedOS(aValue) {
     if (!aValue) {
       return "";

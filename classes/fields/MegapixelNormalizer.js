@@ -10,12 +10,13 @@ module.exports = class MegapixelNormalizer extends FieldNormalizer {
       anObject[attribute] = mpx;
     }
   
-    //it returns '' if undefined or null
+    //returns the numbers of megapixels + MP.
     getNormalizedMegapixel(aValue) {
       if (!aValue || aValue == ' '){
         return "";
       }
       let tempMpx = aValue;
+      //regExp checks if a string contains a number followed by the word MP o megap.
       let regExp = /([0-9]+[.]*[0-9]* *(MP|megap)+)/gi;
       let partial = regExp.exec(tempMpx); //Devuelve algo o null/
       let result;

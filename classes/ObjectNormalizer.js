@@ -6,7 +6,9 @@ module.exports = class ObjectNormalizer {
   //it receives a map of JSON objects, and it normalizes each one
   normalizeObjectsInMap(aMapOfObjects) {
     for (var key in aMapOfObjects) {
-      aMapOfObjects[key] = this.normalizeObject(aMapOfObjects[key]);
+      aMapOfObjects[key].properties.url = aMapOfObjects[key].url;
+      console.log(aMapOfObjects[key].properties);
+      aMapOfObjects[key] = this.normalizeObject(aMapOfObjects[key].properties);
       console.log("-");
     }
     return aMapOfObjects;
