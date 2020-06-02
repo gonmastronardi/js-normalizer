@@ -3,8 +3,8 @@ const fieldNormalizerFactory = require("./classes/fieldNormalizerFactory");
 const ObjectNormalizer = require("./classes/ObjectNormalizer");
 
 //const inputFile = "./data/input.json";
-const inputFile = "./data/storage2.json";
-const outputFile = "./data/output.json";
+const inputFile = "./data/storageMay2029.json";
+let outputFile = "./data/outputMay29.json";
 
 //configuration for each field of the JSON object to normalize
 /*
@@ -26,7 +26,10 @@ var configuration = {
   memory: fieldNormalizerFactory.memoryNormalizer,
   camera: fieldNormalizerFactory.megapixelNormalizer,
   processor: fieldNormalizerFactory.processorNormalizer,
-  screensize: fieldNormalizerFactory.screenSizeNormalizer
+  screenSize: fieldNormalizerFactory.screenSizeNormalizer,
+  battery: fieldNormalizerFactory.batteryNormalizer,
+  operatingSystem: fieldNormalizerFactory.osNormalizer,
+  speedProcessor: fieldNormalizerFactory.speedProcessorNormalizer
 };
 
 //creates an ObjectNormalizer with the previous configuration

@@ -6,13 +6,11 @@ module.exports = class ProcessorNormalizer extends FieldNormalizer {
     //words to remove from title description
     this.unusefulWords = ["Procesador", "Processor"];
   }
+
   normalize(anObject, attribute) {
     let processor = anObject[attribute];
     this.debugField(`Processor: ${processor}`);
     processor = this.getNormalizedProcessor(processor);
-
-    //aca separar procesador de velocidad y ver si puedo devolver velocidad para agegarlo a otro campo
-
     this.debugInfo(`Normalized processor: ${processor}`);
     anObject[attribute] = processor;
   }
@@ -23,40 +21,40 @@ module.exports = class ProcessorNormalizer extends FieldNormalizer {
       return "";
     }
     let original = aValue;
-    let result='';
-    //remove unuseful words if necessary, as 'Processor' or any other written in the array in constructor
-    for (var k in this.unusefulWords) {
-      if (
-        original.toUpperCase().includes(this.unusefulWords[k].toUpperCase())
-      ) {
-        let regex = new RegExp(this.unusefulWords[k], "gi");
-        original = original.replace(regex, "");
-      }
-    }
-    console.log("original: " + original);
-    let cores = "";
+    let cores = this.hasAnyCores(original);
+    if (cores) return cores;
+    return this.removeExtraData(original);
+  }
+
+  hasAnyCores(aValue) {
     //checks if processor is for example 'octa core', 'single-core', etc..
     let regExp = /(([\w])*([ ]|[-])*([\w])*)(core)+/gi;
-    let partialExpression = regExp.exec(original);
+    let partialExpression = regExp.exec(aValue);
     //caso afirmativo guardar en string
     if (partialExpression != null) {
-      cores += partialExpression[0];
-      result+=cores + ' ';
+      let cores = partialExpression[0];
+      return cores;
     }
-    console.log("cores: " + cores);
+    return false;
+  }
 
-    //ver si contiene xxx ghz o xxx Mhz
-    let speedProcessor = "";
-    regExp = /((([0-9]+([.])+[0-9]+) *(ghz)*)|(([0-9]+) *(mhz)))/gi;
-    partialExpression = regExp.exec(original);
-    if (partialExpression != null) {
-      speedProcessor += partialExpression[0];
-      result += speedProcessor;
+  removeExtraData(aValue) {
+    //remove unuseful words if necessary, as 'Processor' or any other written in the array in constructor
+    for (var k in this.unusefulWords) {
+      if (aValue.toUpperCase().includes(this.unusefulWords[k].toUpperCase())) {
+        let regExp = new RegExp(this.unusefulWords[k], "gi");
+        aValue = aValue.replace(regex, "");
+      }
     }
-    console.log("speedProcessor: " + speedProcessor);
-    //caso afirmativo guardar
-    //juntar ambos resultados
 
-    return result;
+    let regExp = /((([0-9]+([.])*[0-9]*) *(ghz))|(([0-9]+) *(mhz)))/gi;
+    let partialExpression = regExp.exec(aValue);
+    while (partialExpression != null) {
+      let speedProcessor = partialExpression[0];
+      aValue = aValue.replace(speedProcessor, "");
+      partialExpression = regExp.exec(aValue);
+    }
+
+    return aValue;
   }
 };

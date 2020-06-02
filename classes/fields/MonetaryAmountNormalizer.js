@@ -9,85 +9,95 @@ module.exports = class MonetaryAmountNormalizer extends FieldNormalizer {
     anObject[attribute] = amount;
   }
 
-  isCharNumber(c) {
-    return c >= "0" && c <= "9";
-  }
-
-  //it returns $ 0,00 if empty, undefined or null
   getNormalizedAmount(anAmount) {
-    if (anAmount === undefined || anAmount === null) {
+    if (!anAmount) {
+      //it returns $ 0,00 if empty, undefined or null
       return "$ 0,00";
     }
     let amount = anAmount.replace("$", "");
-    amount = this.normalizeDecimalOf(amount);
-
-    //Formateo de manera igual para todos.
-    return new Intl.NumberFormat("es-AR", {
-      style: "currency",
-      currency: "ARS"
-    }).format(amount);
+    amount = this.normalizeAmount(amount);
+    return this.formatToArgentinianPeso(amount);
   }
 
   //It returns the given amount with 2 decimals for any currency
-  normalizeDecimalOf(anAmount) {
-    let amount = anAmount;
-    if (amount.includes(".") || amount.includes(",")) {
-      let totalChars = amount.length - 1;
-      let totalDecimals = 0;
+  normalizeAmount(anAmount) {
+    let original = anAmount;
+    let totalDecimals = countDecimals(original);
+    let decimalPart = getDecimalValue(original, totalDecimals);
+    let entirePart = getEntireValue(original, totalDecimals);
 
-      //Cuento la cantidad de decimales
-      while (this.isCharNumber(amount.charAt(totalChars))) {
-        totalDecimals++;
-        totalChars--;
+    if (original.includes(".") && original.includes(",")) {
+      return normalizeAmountWithTwoSymbols(original);
+    } else {
+      if (original.includes(".") || original.includes(",")) {
+        return normalizeAmountWithOneSymbol(original);
+      } else {
+        return original;
       }
+    }
 
-      let decimal;
+    function normalizeAmountWithTwoSymbols(aNumber) {
+      entirePart = replaceSpecialChars(entirePart);
+      if (decimalPart > 2) {
+        decimalPart = decimalPart.slice(0, 2);
+      }
+      return entirePart + "." + decimalPart;
+    }
 
-      switch (true) {
-        case totalDecimals > 2:
-          let original = amount;
-          decimal = getDecimalValue(amount, totalDecimals);
-          decimal = decimal.slice(0, 2);
-          amount = getEntirePrice(amount, totalDecimals);
-          amount = replaceSpecialChars(amount);
-          if (amount.length > 3) {
-            amount = amount + "." + decimal;
+    function normalizeAmountWithOneSymbol(aNumber) {
+      let amount;
+      if (totalDecimals > 2) {
+        if (entirePart.length > 3) {
+          if (entirePart.includes(".") || entirePart.includes(",")) {
+            amount = replaceSpecialChars(entirePart) + decimalPart;
           } else {
-            amount = original;
-            amount = replaceSpecialChars(amount);
+            amount = entirePart + "." + decimalPart.slice(0, 2);
           }
-          break;
-
-        case totalDecimals === 2:
-          decimal = getDecimalValue(amount, totalDecimals);
-          amount = getEntirePrice(amount, totalDecimals);
-          amount = replaceSpecialChars(amount);
-          amount = amount + "." + decimal;
-          break;
-
-        case totalDecimals === 1:
-          decimal = getDecimalValue(amount, totalDecimals);
-          amount = getEntirePrice(amount, totalDecimals);
-          amount = replaceSpecialChars(amount);
-          amount = amount + "." + decimal + "0";
-          break;
+        } else {
+          amount = replaceSpecialChars(original);
+        }
+      } else {
+        entirePart = replaceSpecialChars(entirePart);
+        amount = entirePart + "." + decimalPart;
       }
-    }
-
-    function getDecimalValue(anAmount, decimals) {
-      return anAmount.slice(amount.length - decimals, amount.length);
-    }
-
-    function replaceSpecialChars(anAmount) {
-      amount = anAmount.replace(",", "");
-      amount = amount.replace(".", "");
       return amount;
     }
 
-    function getEntirePrice(anAmount, decimals) {
-      return anAmount.slice(0, amount.length - decimals - 1);
+    function countDecimals(anAmount) {
+      let decimals = 0;
+      let totalChars = anAmount.length - 1;
+      while (isCharNumber(anAmount.charAt(totalChars))) {
+        decimals++;
+        totalChars--;
+      }
+      return decimals;
     }
 
-    return amount;
+    function getDecimalValue(anAmount, decimals) {
+      return anAmount.slice(anAmount.length - decimals, anAmount.length);
+    }
+
+    function getEntireValue(anAmount, decimals) {
+      return anAmount.slice(0, anAmount.length - decimals - 1);
+    }
+
+    function replaceSpecialChars(anAmount) {
+      while (anAmount.includes(".") || anAmount.includes(",")) {
+        anAmount = anAmount.replace(",", "");
+        anAmount = anAmount.replace(".", "");
+      }
+      return anAmount;
+    }
+
+    function isCharNumber(c) {
+      return c >= "0" && c <= "9";
+    }
+  }
+
+  formatToArgentinianPeso(anAmount) {
+    return new Intl.NumberFormat("es-AR", {
+      style: "currency",
+      currency: "ARS"
+    }).format(anAmount);
   }
 };

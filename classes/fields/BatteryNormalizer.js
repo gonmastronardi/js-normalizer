@@ -14,17 +14,22 @@ module.exports = class BatteryNormalizer extends FieldNormalizer {
     if (!aValue) {
       return "";
     }
-    let regExp = /([0-9]+[.]*[0-9]* *(Ah)+)/gm;
+
+    let regExp = /([0-9]+[.]*[0-9]*)/gim;
     let result = regExp.exec(aValue);
-    if (result != null){
+    if (result != null) {
       let battery = result[0];
       battery = parseFloat(battery);
-      return battery*1000 + " mAh";
+      if (battery.toString().length >= 4) {
+        return battery + " mAh";
+      } else {
+        return battery * 1000 + " mAh";
+      }
     }
-    result = parseFloat(aValue);
-    if (result){
-      return result + " mAh";
-    }
-    return '';
+    return "";
   }
 };
+
+//quedarme ocn el numero
+//si tiene 4 digitos devuelvo
+//sino multiplico x1000

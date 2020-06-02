@@ -14,7 +14,8 @@ module.exports = class TitleNormalizer extends FieldNormalizer {
       "Original",
       "Nuevo",
       "Modelo",
-      "\\*1\\*"
+      "\\*1\\*",
+      "Nuevo",
     ];
   }
 

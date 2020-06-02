@@ -18,9 +18,17 @@ describe('getNormalizedMegapixel', () => {
         let result = megapixelNormalizer.getNormalizedMegapixel('Doble Cámara 12 megapíxeles + 12MP');
         expect(result).toBe('12 MP');
     });
+    it('should normalize: Doble Cámara 12 megapíxeles + 24MP. Expected: 24 MP', () => {
+        let result = megapixelNormalizer.getNormalizedMegapixel('Doble Cámara 12 megapíxeles + 24MP');
+        expect(result).toBe('24 MP');
+    });
     it('should normalize: Dual 12+5. Expected: 12 MP', () => {
         let result = megapixelNormalizer.getNormalizedMegapixel('Dual 12+5');
         expect(result).toBe('12 MP');
+    });
+    it('should normalize: Dual 12+48. Expected: 48 MP', () => {
+        let result = megapixelNormalizer.getNormalizedMegapixel('Dual 12+48');
+        expect(result).toBe('48 MP');
     });
     it('should normalize: \'\'. Expected: \'\'', () => {
         let result = megapixelNormalizer.getNormalizedMegapixel(' ');

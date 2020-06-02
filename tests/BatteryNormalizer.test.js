@@ -18,6 +18,10 @@ describe('getNormalizedBattery', () => {
         let result = batteryNormalizer.getNormalizedBattery('3 Ah');
         expect(result).toBe('3000 mAh');
     });
+    it('should normalize: 3.5 Ah. Expected: 3500 mAh', () => {
+        let result = batteryNormalizer.getNormalizedBattery('3.5 Ah');
+        expect(result).toBe('3500 mAh');
+    });
     //empty string
     it('should normalize: \'\'. Expected: \'\'', () => {
         let result = batteryNormalizer.getNormalizedBattery(' ');

@@ -33,9 +33,9 @@ module.exports = class BrandNormalizer extends FieldNormalizer {
   }
 
   /** 
-   * it receives the brand and the entire object.
-   * if Brand is present, it asks if the value is contained in the defaultBrands array.
-   * if not, it compares every field of the object with the defaultBrands array.
+   * it receives the brand field and the entire object.
+   * if Brand field is not empty, it asks if the value is contained in the defaultBrands array.
+   * if not, it compares every field of the object with the defaultBrands array (may be brand is on title field).
   */
   getNormalizedBrand(aValue, anObject) {
     let brand = aValue;

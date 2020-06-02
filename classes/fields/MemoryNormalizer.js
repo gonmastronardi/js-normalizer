@@ -1,24 +1,6 @@
 const FieldNormalizer = require("./FieldNormalizer");
 
 module.exports = class MemoryNormalizer extends FieldNormalizer {
-  constructor() {
-    super();
-    this.defaultValues = [
-      "1GB",
-      "2GB",
-      "3GB",
-      "4GB",
-      "6GB",
-      "8GB",
-      "12GB",
-      "16GB",
-      "32GB",
-      "64GB",
-      "128GB",
-      "256GB",
-      "512GB"
-    ];
-  }
 
   normalize(anObject, attribute) {
     let memory = anObject[attribute];
@@ -28,20 +10,17 @@ module.exports = class MemoryNormalizer extends FieldNormalizer {
     anObject[attribute] = memory;
   }
 
-  //it returns '' if undefined or null
   getNormalizedMemory(aValue) {
     if (!aValue) {
-      return "";
+      return "" //it returns '' if undefined or null
     }
-    //remove whitespaces
-    let memory = aValue.replace(/ /g, "");
+    let memory = aValue.replace(/ /g, "") //remove whitespaces
     memory = memory.toUpperCase();
     // this.debugInfo(`Actual value: ${memory}`);
-    let regExp = /([0-9]+ *(GB)+)/gi;
+    let regExp = /([0-9]+[.,]*[0-9]* *(GB)+)/gi;
     let result = regExp.exec(memory);
     if (result != null) {
       memory = result[0];
-      if (this.defaultValues.includes(memory)) 
       return parseInt(memory) + " GB";
     }
     return "";

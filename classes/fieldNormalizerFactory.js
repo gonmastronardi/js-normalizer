@@ -7,6 +7,7 @@ const BatteryNormalizer = require("./fields/BatteryNormalizer");
 const TitleNormalizer = require("./fields/TitleNormalizer");
 const OSNormalizer = require("./fields/OSNormalizer");
 const ProcessorNormalizer = require("./fields/ProcessorNormalizer");
+const SpeedProcessorNormalizer = require('./fields/SpeedProcessorNormalizer')
 
 module.exports = {
   monetaryAmountNormalizer: new MonetaryAmountNormalizer(),
@@ -17,5 +18,6 @@ module.exports = {
   batteryNormalizer: new BatteryNormalizer(),
   titleNormalizer: new TitleNormalizer(),
   osNormalizer: new OSNormalizer(),
-  processorNormalizer: new ProcessorNormalizer()
+  processorNormalizer: new ProcessorNormalizer(),
+  speedProcessorNormalizer: new SpeedProcessorNormalizer()
 };
