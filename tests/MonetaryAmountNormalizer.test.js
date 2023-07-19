@@ -1,4 +1,4 @@
-const MonetaryAmountNormalizer = require("../classes/fields/MonetaryAmountNormalizer");
+import MonetaryAmountNormalizer from "../classes/fields/MonetaryAmountNormalizer";
 
 const monetaryAmountNormalizer = new MonetaryAmountNormalizer();
   // 15000,555
@@ -22,6 +22,11 @@ describe("getNormalizedAmount", () => {
   it("should normalize: $1,533,333. Expected: $ 1.533.333,00", () => {
     let result = monetaryAmountNormalizer.getNormalizedAmount("$1,533,333");
     expect(result).toMatch(/1.533.333,00/);
+  });
+  "$\n\t\t\t\t28.499"
+  it("should normalize: $1533,333. Expected: $ 1.533,33", () => {
+    let result = monetaryAmountNormalizer.getNormalizedAmount("$\n\t\t\t\t28.499");
+    expect(result).toMatch(/28.499,00/);
   });
   it("should normalize: $1533,333. Expected: $ 1.533,33", () => {
     let result = monetaryAmountNormalizer.getNormalizedAmount("$1533,333");

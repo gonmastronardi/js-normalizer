@@ -1,4 +1,4 @@
-const ScreenSizeNormalizer = require("../classes/fields/ScreenSizeNormalizer");
+import ScreenSizeNormalizer from "../classes/fields/ScreenSizeNormalizer";
 const screenSizeNormalizer = new ScreenSizeNormalizer();
 
 describe("normalizeScreenSize", () => {

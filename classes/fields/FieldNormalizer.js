@@ -1,8 +1,8 @@
-const debugField = require("../../lib/debuggers").field;
-const debugInfo = require("../../lib/debuggers").info;
+import {field as debugField} from "../../lib/debuggers.js";
+import {info as debugInfo} from "../../lib/debuggers.js";
 
-//abstract class
-module.exports = class FieldNormalizer {
+
+export default class FieldNormalizer {
   constructor() {
     //if setted, console.logs fields properties
     //export DEBUG=field,info
@@ -14,4 +14,24 @@ module.exports = class FieldNormalizer {
   normalize(anObject, attribute) {
     throw new TypeError("Must override method");
   }
+
+  //it receives a text and an array with those words intented to delete in it. 
+  //it returns the text modified.
+  deleteIfExists(aValue, wordsToDelete){
+    if(!aValue){
+      return "";
+    }
+    let result = aValue;
+      for (var k in wordsToDelete) {
+        if (result.toUpperCase().includes(wordsToDelete[k].toUpperCase())) {
+          let regex = new RegExp(wordsToDelete[k], "gi");
+          result = result.replace(regex, "");
+        }
+      }
+        //remove extra whitespaces
+      result = result.replace(/^\s+|\s+$/g, "").replace(/\s+/g, " ");
+      return result;
+
+  }
+
 };

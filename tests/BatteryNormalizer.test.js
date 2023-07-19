@@ -1,4 +1,4 @@
-const BatteryNormalizer = require('../classes/fields/BatteryNormalizer');
+import BatteryNormalizer from '../classes/fields/BatteryNormalizer';
 const batteryNormalizer = new BatteryNormalizer();
 
 describe('getNormalizedBattery', () => {

@@ -1,4 +1,4 @@
-const ProcessorNormalizer = require('../classes/fields/ProcessorNormalizer');
+import ProcessorNormalizer from '../classes/fields/ProcessorNormalizer';
 const processorNormalizer = new ProcessorNormalizer();
 
 describe('getNormalizedProcessor', () => {

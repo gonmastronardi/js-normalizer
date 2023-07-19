@@ -1,4 +1,4 @@
-const TitleNormalizer = require('../classes/fields/TitleNormalizer');
+import TitleNormalizer from '../classes/fields/TitleNormalizer';
 const titleNormalizer = new TitleNormalizer();
 
 describe('getNormalizedTitle', () => {

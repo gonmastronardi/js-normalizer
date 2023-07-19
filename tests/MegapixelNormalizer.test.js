@@ -1,4 +1,4 @@
-const MegapixelNormalizer = require('../classes/fields/MegapixelNormalizer');
+import MegapixelNormalizer from '../classes/fields/MegapixelNormalizer';
 const megapixelNormalizer = new MegapixelNormalizer();
 
 describe('getNormalizedMegapixel', () => {

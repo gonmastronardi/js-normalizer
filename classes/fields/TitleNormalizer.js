@@ -1,6 +1,6 @@
-const FieldNormalizer = require("./FieldNormalizer");
+import FieldNormalizer from "./FieldNormalizer.js";
 
-module.exports = class TitleNormalizer extends FieldNormalizer {
+export default class TitleNormalizer extends FieldNormalizer {
   constructor() {
     super();
     //words to remove from title description

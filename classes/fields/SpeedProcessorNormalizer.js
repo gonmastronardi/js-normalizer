@@ -1,6 +1,6 @@
-const FieldNormalizer = require("./FieldNormalizer");
+import FieldNormalizer from "./FieldNormalizer.js";
 
-module.exports = class SpeedProcessorNormalizer extends FieldNormalizer {
+export default class SpeedProcessorNormalizer extends FieldNormalizer {
   constructor() {
     super();
     //words to remove from title description
@@ -27,7 +27,7 @@ module.exports = class SpeedProcessorNormalizer extends FieldNormalizer {
   }
 
   hasAnySpeedValues(aValue) {
-    //check if contains 'xxx ghz' or 'xxx Mhz'
+    //check if it contains 'xxx ghz' or 'xxx Mhz'
     let regExp = /((([0-9]+[.|,]*[0-9]*))+ *([ghz|mhz]+)*)/gi;
     let partialExpression = regExp.exec(aValue);
     //caso afirmativo guardar en string

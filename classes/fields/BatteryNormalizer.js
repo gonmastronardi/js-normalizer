@@ -1,6 +1,6 @@
-const FieldNormalizer = require("./FieldNormalizer");
+import FieldNormalizer from "./FieldNormalizer.js";
 
-module.exports = class BatteryNormalizer extends FieldNormalizer {
+export default class BatteryNormalizer extends FieldNormalizer {
   normalize(anObject, attribute) {
     let battery = anObject[attribute];
     this.debugField(`Battery: ${battery}`);

@@ -1,6 +1,6 @@
-const FieldNormalizer = require("./FieldNormalizer");
+import FieldNormalizer from "./FieldNormalizer.js";
 
-module.exports = class BrandNormalizer extends FieldNormalizer {
+export default class BrandNormalizer extends FieldNormalizer {
   constructor() {
     super();
     this.defaultBrands = [

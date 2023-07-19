@@ -1,6 +1,7 @@
-const FieldNormalizer = require("./FieldNormalizer");
+import FieldNormalizer from "./FieldNormalizer.js";
 
-module.exports = class MonetaryAmountNormalizer extends FieldNormalizer {
+export default class MonetaryAmountNormalizer extends FieldNormalizer {
+  
   normalize(anObject, attribute) {
     let amount = anObject[attribute];
     this.debugField(`Price: ${amount}`);
@@ -14,7 +15,10 @@ module.exports = class MonetaryAmountNormalizer extends FieldNormalizer {
       //it returns $ 0,00 if empty, undefined or null
       return "$ 0,00";
     }
-    let amount = anAmount.replace("$", "");
+    var amount = anAmount.replace(
+      /[`~!@#$%^&*()_|+\-=?;:'"<>\{\}\[\]\\\/\s]/gi,
+      ""
+    );
     amount = this.normalizeAmount(amount);
     return this.formatToArgentinianPeso(amount);
   }
@@ -97,7 +101,7 @@ module.exports = class MonetaryAmountNormalizer extends FieldNormalizer {
   formatToArgentinianPeso(anAmount) {
     return new Intl.NumberFormat("es-AR", {
       style: "currency",
-      currency: "ARS"
+      currency: "ARS",
     }).format(anAmount);
   }
 };

@@ -1,4 +1,4 @@
-const BrandNormalizer = require('../classes/fields/BrandNormalizer');
+import BrandNormalizer from '../classes/fields/BrandNormalizer';
 const brandNormalizer = new BrandNormalizer();
 
 describe('getNormalizedBrand', () => {

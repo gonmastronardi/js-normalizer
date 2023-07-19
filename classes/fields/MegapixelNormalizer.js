@@ -1,6 +1,6 @@
-const FieldNormalizer = require("./FieldNormalizer");
+import FieldNormalizer from "./FieldNormalizer.js";
 
-module.exports = class MegapixelNormalizer extends FieldNormalizer {
+export default class MegapixelNormalizer extends FieldNormalizer {
   normalize(anObject, attribute) {
     let mpx = anObject[attribute];
     this.debugField(`MPixel: ${mpx}`);

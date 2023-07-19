@@ -1,6 +1,6 @@
-const FieldNormalizer = require("./FieldNormalizer");
+import FieldNormalizer from "./FieldNormalizer.js";
 
-module.exports = class OSNormalizer extends FieldNormalizer {
+export default class OSNormalizer extends FieldNormalizer {
   constructor() {
     super();
     this.defaultOS = ["Android", "iOS"];

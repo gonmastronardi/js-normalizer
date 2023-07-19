@@ -1,6 +1,6 @@
-const FieldNormalizer = require("./FieldNormalizer");
+import FieldNormalizer from "./FieldNormalizer.js";
 
-module.exports = class MemoryNormalizer extends FieldNormalizer {
+export default class MemoryNormalizer extends FieldNormalizer {
 
   normalize(anObject, attribute) {
     let memory = anObject[attribute];

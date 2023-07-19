@@ -1,4 +1,4 @@
-const OSNormalizer = require('../classes/fields/OSNormalizer');
+import OSNormalizer from '../classes/fields/OSNormalizer';
 const osNormalizer = new OSNormalizer();
 
 describe('getNormalizedOS', () => {

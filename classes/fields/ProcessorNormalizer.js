@@ -1,6 +1,6 @@
-const FieldNormalizer = require("./FieldNormalizer");
+import FieldNormalizer from "./FieldNormalizer.js";
 
-module.exports = class ProcessorNormalizer extends FieldNormalizer {
+export default class ProcessorNormalizer extends FieldNormalizer {
   constructor() {
     super();
     //words to remove from title description
@@ -43,7 +43,7 @@ module.exports = class ProcessorNormalizer extends FieldNormalizer {
     for (var k in this.unusefulWords) {
       if (aValue.toUpperCase().includes(this.unusefulWords[k].toUpperCase())) {
         let regExp = new RegExp(this.unusefulWords[k], "gi");
-        aValue = aValue.replace(regex, "");
+        aValue = aValue.replace(regExp, "");
       }
     }
 

@@ -1,4 +1,4 @@
-const MemoryNormalizer = require('../classes/fields/MemoryNormalizer');
+import MemoryNormalizer from '../classes/fields/MemoryNormalizer';
 const memoryNormalizer = new MemoryNormalizer();
 
 describe('getNormalizedMemory', () => {

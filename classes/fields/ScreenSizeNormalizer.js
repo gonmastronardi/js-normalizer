@@ -1,6 +1,6 @@
-const FieldNormalizer = require("./FieldNormalizer");
+import FieldNormalizer from "./FieldNormalizer.js";
 
-module.exports = class ScreenSizeNormalizer extends FieldNormalizer{
+export default class ScreenSizeNormalizer extends FieldNormalizer{
 
     normalize(anObject, anAttibute){
         let screenSize = anObject[anAttibute];
